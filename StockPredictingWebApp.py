@@ -10,37 +10,43 @@ import streamlit as st
 from plotly import graph_objs as go
 from datetime import date
 from fbprophet.plot import plot_plotly
-import tensorflow
 
+#importing the required packages.
+
+#-fbprophet is an open ai python library devloped by the data science team of facebook. It is known for its easy to use functions and it is also more accurate than the other neural networks used for time series data forecasting such as LSTM(Long hsort term memory) or ARIMA.
+#-yfinance-It helps us to download the required datasets using yahoo finance.
+#-streamlit library makes it easier to create a webpage and provides various in built function that makes webapp devlopment so easy.
+#-plotly library is known for data visualization other than matplotlib or seaborn.
 
 # In[11]:
 
 
-START="2023-01-01"
+START="2019-06-01"
 TODAY=date.today().strftime("%Y-%m-%d")
 
-
+#defining the time period to be overlooked.
 # In[12]:
 
 
 st.title("Stock Prediction App")
 
-stock_types=[]
-selected_stock_type=st.selectbox("Select the type of stock")
 
+stocks1=st.text_input(label="Enter here if you are searching for a stock that is not available in  the list.")
 
-stocks=["AAPL","GOOG","MSFT","GME","MS","RELIANCE.NS","ADANIENT.NS"]
+stocks=["AAPL","GOOG","MSFT","GME","MS","RELIANCE.NS","ADANIENT.NS",stocks1]
 selected_stocks=st.selectbox("Select dataset for prediction",stocks)
-
 
 
 nYEARS=st.slider("Years of prediction.",1,4)
 period=nYEARS*365
+
+#st.cache will save the dataset in the cache memory and every time we need the same dataset it will load that dataset from the cache memory instead of downloading it again and again.
 @st.cache
 def load_data(ticker):
     data=yf.download(ticker,START,TODAY)
     data.reset_index(inplace=True)
     return data;
+#this function will download and load the required dataset according to the specified time period.
 
 def plotRawData():
     fig=go.Figure()
@@ -50,12 +56,7 @@ def plotRawData():
 
     st.plotly_chart(fig)
 
-#For forecasting
-
-
-
-
-# In[13]:
+#this function will simply plot the raw dataset that we have loaded.
 
 data_load_state=st.text("LOADING DATA....")
 data=load_data(selected_stocks)
@@ -65,6 +66,19 @@ st.subheader("Raw data")
 st.write(data.tail())
 
 plotRawData()
+#calling the function to plot the raw data.
+
+
+
+#For forecasting, now we using the fbprophet library for which we will have to rename the date column to ds and the other value on whose basis we are going to predict the future dataframes as y.This is basically a norm to use the library.
+
+#The mathematical equation behind the Prophet model is defined as:
+#y(t) = g(t) + s(t) + h(t) + e(t)
+# g(t) representing the trend. Prophet uses a piecewise linear model for trend forecasting.
+#s(t) represents periodic changes (weekly, monthly, yearly).
+#h(t) represents the effects of holidays (recall: Holidays impact businesses).
+#e(t) is the error term.
+
 
 df_train=data[['Date','Close']]
 df_train=df_train.rename(columns={"Date":"ds","Close":"y"})
@@ -79,6 +93,8 @@ st.write(forecast)
 
 fig1=plot_plotly(model,forecast)
 st.plotly_chart(fig1)
+
+#plotting the forecasted data
 
 st.write("Forecast Components")
 fig2=model.plot_components(forecast)
