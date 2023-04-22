@@ -31,9 +31,6 @@ On the sidebar we could see the two bifurcations of the predicting web-applicati
 
 ####For ease the components of the predicted stock price chart are also plotted on the basis of different timeframes.####
 ####A news api is also integrated to this model that provides latest news straight from the well known stock markets of the world.####
-  
-  
-  
-  
+
 
   -->Also there are accurate graphs plotted on basis of the predicted dat
