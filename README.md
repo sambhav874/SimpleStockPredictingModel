@@ -35,15 +35,5 @@ On the sidebar we could see the two bifurcations of the predicting web-applicati
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  -->Also there are accurate graphs plotted on basis of the predicted data.
+
+  -->Also there are accurate graphs plotted on basis of the predicted dat
