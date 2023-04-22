@@ -22,9 +22,28 @@ On the sidebar we could see the two bifurcations of the predicting web-applicati
   
   -Live Data Stock Price Predictor
   
-  -->This will fetch and predict the upcoming uncertainities and rise of the selected stocks.
+  -->This will fetch and predict the upcoming hour to hour uncertainities and rise of the selected stocks.
   -->It can fetch fetch the current day data only.
   -->Also there are accurate graphs plotted on basis of the predicted data of the current day.
-  -->
+  -->It is more benificial for real time trading as it could provide the predictions the next minutes and few even hours
+
+
+
+####For ease the components of the predicted stock price chart are also plotted on the basis of different timeframes.####
+####A news api is also integrated to this model that provides latest news straight from the well known stock markets of the world.####
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   -->Also there are accurate graphs plotted on basis of the predicted data.
